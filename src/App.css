@@ -112,3 +112,9 @@ body {
 .main-container {
   flex: 1;
 }
+
+.app.header {
+    font-size: 115px;
+    position: absolute;
+    top: 15%;
+}
