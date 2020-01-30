@@ -118,3 +118,19 @@ body {
     position: absolute;
     top: 15%;
 }
+
+.track.container {
+    display: block;
+    text-align: center;
+    width: min-content;
+}
+
+.track.item {
+    display: block;
+}
+
+.main.container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}

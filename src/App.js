@@ -1,8 +1,11 @@
 import React, { Component } from "react"
-import * as $ from "jquery"
-import { authEndpoint, clientId, redirectUri, scopes } from "./config"
 import hash from "./hash"
 import "./App.css"
+
+import ajaxSend from './lib/util/ajaxSend'
+import Login from './lib/components/login'
+import Track from './lib/components/track'
+import Header from './lib/components/header'
 
 class App extends Component {
     constructor() {
@@ -30,24 +33,8 @@ class App extends Component {
         }
     }
 
-    send( url, token, cb ) {
-        $.ajax({
-            url: url,
-            type: "GET",
-            beforeSend: (xhr) => {
-                xhr.setRequestHeader("Authorization", "Bearer " + token);
-            },
-            success: (data) => {
-                cb( data )
-            },
-            error: function( error ) {
-                console.log( error );
-            }
-        })
-    }
-
     getUserTopArtistsOrTracks( token, type ) {
-        this.send( `https://api.spotify.com/v1/me/top/${type}`, token, ( response ) => {
+        ajaxSend( `https://api.spotify.com/v1/me/top/${type}`, 'GET', token, ( response ) => {
             this.setState({
                 user: response
             })
@@ -55,7 +42,7 @@ class App extends Component {
     }
 
     getUser( token ) {
-        this.send( 'https://api.spotify.com/v1/me', token, ( response ) => {
+        ajaxSend( 'https://api.spotify.com/v1/me', 'GET', token, ( response ) => {
             this.setState({
                 user: response
             })
@@ -63,7 +50,7 @@ class App extends Component {
     }
 
     getTopArtists( token ) {
-        this.send( 'https://api.spotify.com/v1/me/top/artists', token, ( response ) => {
+        ajaxSend( 'https://api.spotify.com/v1/me/top/artists', 'GET', token, ( response ) => {
             this.setState({
                 items: response.items
             })
@@ -71,24 +58,12 @@ class App extends Component {
     }
 
     getRecentlyPlayed( token ) {
-        $.ajax({
-            url: "https://api.spotify.com/v1/me/player/recently-played",
-            type: "GET",
-            beforeSend: (xhr) => {
-                xhr.setRequestHeader("Authorization", "Bearer " + token);
-            },
-            success: (data) => {
-
-                this.setState({
-                    items: data.items
-                })
-
-            },
-            error: function( error ) {
-                console.log( error );
-            }
+        ajaxSend( 'https://api.spotify.com/v1/me/player/recently-played', 'GET', token, ( response ) => {
+            this.setState({
+                items: response.items
+            })
         })
-  }
+    }
 
     render() {
         return (
@@ -96,24 +71,20 @@ class App extends Component {
                 <header className="App-header">
                     { ! this.state.token && <div className="app header">Spotistics</div> }
                     { !this.state.token && (
-                        <a className="btn btn--loginApp-link"
-                            href={
-                                `${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join("%20") }
-                                &response_type=token&show_dialog=true` 
-                            }>
-                            Login to Spotify
-                        </a>
+                        <Login/>
                     ) }
-                    <ul>
-                    { this.state.user && <div>Bem-vindo, {this.state.user.display_name}</div> }
-                    {this.state.items.map( item => (
-                        <li key={item.track.id}>
-                        <div>Música: {item.track.name}</div>
-                        <div>Álbum: {item.track.album.name}</div>
-                        </li>
-                    ))}
-                    </ul>
+                    { this.state.user && <Header user={this.state.user.display_name}/> }
                 </header>
+                <body className="app body">
+                    <div className="main container">
+                        {this.state.items.map( item => (
+                            <Track name={item.track.name}
+                                artist={item.track.artists[0].name}
+                                img={item.track.album.images[1].url}>
+                            </Track>
+                        ))}
+                    </div>
+                </body>
             </div>
         );
     }
