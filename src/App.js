@@ -6,6 +6,8 @@ import ajaxSend from './lib/util/ajaxSend'
 import Login from './lib/components/login'
 import Track from './lib/components/track'
 import Header from './lib/components/header'
+import getUserTopArtistsOrTracks from './lib/queries/getUserTopArtistsOrTracks'
+import getUser from './lib/queries/getUser'
 
 class App extends Component {
     constructor() {
@@ -16,8 +18,8 @@ class App extends Component {
             items: []
         }
 
-        this.getRecentlyPlayed = this.getRecentlyPlayed.bind(this)
-        this.getUser = this.getUser.bind(this)
+        this.getUserTopArtistsOrTracks = getUserTopArtistsOrTracks.bind(this)
+        this.getUser = getUser.bind(this)
     }
 
     componentDidMount() {
@@ -28,25 +30,18 @@ class App extends Component {
                 token: _token
             })
 
-            this.getUser( _token )
-            this.getRecentlyPlayed( _token )
+            getUser( _token, ( response ) => {
+                this.setState({
+                    user: response
+                })
+            })
+
+            getUserTopArtistsOrTracks( _token, 'tracks', ( response ) => {
+                this.setState({
+                    items: response.items
+                })
+            })
         }
-    }
-
-    getUserTopArtistsOrTracks( token, type ) {
-        ajaxSend( `https://api.spotify.com/v1/me/top/${type}`, 'GET', token, ( response ) => {
-            this.setState({
-                user: response
-            })
-        })
-    }
-
-    getUser( token ) {
-        ajaxSend( 'https://api.spotify.com/v1/me', 'GET', token, ( response ) => {
-            this.setState({
-                user: response
-            })
-        })
     }
 
     getTopArtists( token ) {
@@ -57,13 +52,13 @@ class App extends Component {
         })
     }
 
-    getRecentlyPlayed( token ) {
-        ajaxSend( 'https://api.spotify.com/v1/me/player/recently-played', 'GET', token, ( response ) => {
-            this.setState({
-                items: response.items
-            })
-        })
-    }
+    // getRecentlyPlayed( token ) {
+    //     ajaxSend( 'https://api.spotify.com/v1/me/player/recently-played', 'GET', token, ( response ) => {
+    //         this.setState({
+    //             items: response.items
+    //         })
+    //     })
+    // }
 
     render() {
         return (
@@ -78,9 +73,10 @@ class App extends Component {
                 <body className="app body">
                     <div className="main container">
                         {this.state.items.map( item => (
-                            <Track name={item.track.name}
-                                artist={item.track.artists[0].name}
-                                img={item.track.album.images[1].url}>
+                            <Track 
+                                name={item.name}
+                                artist={item.artists[0].name}
+                                img={item.album.images[1].url}>
                             </Track>
                         ))}
                     </div>

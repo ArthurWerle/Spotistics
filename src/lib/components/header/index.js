@@ -3,7 +3,10 @@ import React from "react"
 function Header( props ) {
 
     return (
-        <div>Bem-vindo, {props.user}</div>
+        <div>
+            <div>Bem-vindo, {props.user}</div>
+            <div>Aqui estão algumas estatíscas sobre a sua conta do Spotify</div>
+        </div>
     )
 
 }
