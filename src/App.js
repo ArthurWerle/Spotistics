@@ -2,12 +2,18 @@ import React, { Component } from "react"
 import hash from "./hash"
 import "./App.css"
 
-import ajaxSend from './lib/util/ajaxSend'
+//components
 import Login from './lib/components/login'
-import Track from './lib/components/track'
 import Header from './lib/components/header'
-import getUserTopArtistsOrTracks from './lib/queries/getUserTopArtistsOrTracks'
+import TopTracks from './lib/components/topTracks'
+import RecentlyPlayed from './lib/components/recentlyPlayed'
+import TopArtists from './lib/components/topArtists'
+
+//queries
+import getUserTop from './lib/queries/getUserTop'
 import getUser from './lib/queries/getUser'
+import getRecentlyPlayed from './lib/queries/getRecentlyPlayed'
+
 
 class App extends Component {
     constructor() {
@@ -15,11 +21,40 @@ class App extends Component {
         this.state = {
             user: null,
             token: null,
-            items: []
+            topTracks: [],
+            topArtists: [],
+            recentlyPlayed: []
         }
 
-        this.getUserTopArtistsOrTracks = getUserTopArtistsOrTracks.bind(this)
         this.getUser = getUser.bind(this)
+        this.getRecentlyPlayed = getRecentlyPlayed.bind(this)
+        this.getUserTop = getUserTop.bind(this)
+    }
+
+    executeQueries( token ) {
+        getUser( token, ( response ) => {
+            this.setState({
+                user: response
+            })
+        })
+
+        getRecentlyPlayed( token, ( response ) => {
+            this.setState({
+                recentlyPlayed: response.items
+            })
+        })
+
+        getUserTop( 'tracks', token, ( response ) => {
+            this.setState({
+                topTracks: response.items
+            })
+        })
+
+        getUserTop( 'artists', token, ( response ) => {
+            this.setState({
+                topArtists: response.items
+            })
+        })
     }
 
     componentDidMount() {
@@ -30,35 +65,9 @@ class App extends Component {
                 token: _token
             })
 
-            getUser( _token, ( response ) => {
-                this.setState({
-                    user: response
-                })
-            })
-
-            getUserTopArtistsOrTracks( _token, 'tracks', ( response ) => {
-                this.setState({
-                    items: response.items
-                })
-            })
+            this.executeQueries( _token )
         }
     }
-
-    getTopArtists( token ) {
-        ajaxSend( 'https://api.spotify.com/v1/me/top/artists', 'GET', token, ( response ) => {
-            this.setState({
-                items: response.items
-            })
-        })
-    }
-
-    // getRecentlyPlayed( token ) {
-    //     ajaxSend( 'https://api.spotify.com/v1/me/player/recently-played', 'GET', token, ( response ) => {
-    //         this.setState({
-    //             items: response.items
-    //         })
-    //     })
-    // }
 
     render() {
         return (
@@ -72,13 +81,9 @@ class App extends Component {
                 </header>
                 <body className="app body">
                     <div className="main container">
-                        {this.state.items.map( item => (
-                            <Track 
-                                name={item.name}
-                                artist={item.artists[0].name}
-                                img={item.album.images[1].url}>
-                            </Track>
-                        ))}
+                        <RecentlyPlayed items={ this.state.recentlyPlayed }/>
+                        <TopArtists items={ this.state.topArtists }/>
+                        <TopTracks items={ this.state.topTracks }/>
                     </div>
                 </body>
             </div>
