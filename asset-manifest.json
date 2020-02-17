@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/spotistics/static/css/main.7981b4d9.chunk.css",
+    "main.js": "/spotistics/static/js/main.9acadbde.chunk.js",
+    "main.js.map": "/spotistics/static/js/main.9acadbde.chunk.js.map",
+    "runtime-main.js": "/spotistics/static/js/runtime-main.48a0267d.js",
+    "runtime-main.js.map": "/spotistics/static/js/runtime-main.48a0267d.js.map",
+    "static/js/2.016d4ac9.chunk.js": "/spotistics/static/js/2.016d4ac9.chunk.js",
+    "static/js/2.016d4ac9.chunk.js.map": "/spotistics/static/js/2.016d4ac9.chunk.js.map",
+    "index.html": "/spotistics/index.html",
+    "precache-manifest.08cbcf47b631d95f022844c05556162f.js": "/spotistics/precache-manifest.08cbcf47b631d95f022844c05556162f.js",
+    "service-worker.js": "/spotistics/service-worker.js",
+    "static/css/main.7981b4d9.chunk.css.map": "/spotistics/static/css/main.7981b4d9.chunk.css.map",
+    "static/js/2.016d4ac9.chunk.js.LICENSE": "/spotistics/static/js/2.016d4ac9.chunk.js.LICENSE"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.48a0267d.js",
+    "static/js/2.016d4ac9.chunk.js",
+    "static/css/main.7981b4d9.chunk.css",
+    "static/js/main.9acadbde.chunk.js"
+  ]
+}
