@@ -1,5 +1,7 @@
 PS: It is not done yet.
 
+___
+
 React application that uses SpotifyAPI to allow users to see:
  - Recently played tracks
  - Top listened artists
@@ -7,4 +9,6 @@ React application that uses SpotifyAPI to allow users to see:
 
 Check it out [here](https://arthurwerle.github.io/Spotistics/) :)
 
-made with :heart: by me
+___
+
+*made with :heart: by me*
