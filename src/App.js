@@ -5,6 +5,7 @@ import "./App.css"
 //components
 import Login from './lib/components/login'
 import Header from './lib/components/header'
+import Greetings from './lib/components/greetings'
 import TopTracks from './lib/components/topTracks'
 import RecentlyPlayed from './lib/components/recentlyPlayed'
 import TopArtists from './lib/components/topArtists'
@@ -73,11 +74,16 @@ class App extends Component {
         return (
             <div className="App">
                 <header className="App-header">
-                    { ! this.state.token && <div className="app header">Spotistics</div> }
-                    { !this.state.token && (
-                        <Login/>
+                    { ! this.state.token && (
+                        <div>
+                            <Header/>
+                            <Login/>
+                        </div>
                     ) }
-                    { this.state.user && <Header user={this.state.user.display_name}/> }
+                    {/* { !this.state.token && (
+                        <Login/>
+                    ) } */}
+                    { this.state.user && <Greetings user={this.state.user.display_name}/> }
                 </header>
                 <body className="app body">
                     <div className="main container">
