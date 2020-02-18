@@ -20,7 +20,7 @@ ___
  ### Possible problems
   - You'll need to change the `clientId` variable in `src/config.js` to your clientID.
   - You'll need to change the `redirectUri` variable in `src/config.js` if you're using something different that `http:\\localhost:3000` 
-  - Client URI erros: you'll need to set the redirect URL's in your Spotify For Developers Dashboard, because I'll setted it for my cliente ID (that is provided to you when you add an application to your account, and mine redirects to specific URL's that may not apply for you)
+  - Client URI erros: you'll need to set the redirect URL's in your **[Spotify For Developers Dashboard](https://developer.spotify.com/dashboard/)**, because I'll setted it for my client ID (that is provided to you when you add an application to your account, and mine redirects to specific URL's that may not apply for you)
 ___
 
 Feel free to fork, contribute and comment your thoughts about it.
