@@ -4,3 +4,5 @@ React application that uses SpotifyAPI to allow users to see:
  - Top listened tracks
 
 Check it out [here](https://arthurwerle.github.io/Spotistics/) :)
+
+made with :heart: by me
