@@ -1,13 +1,14 @@
 import React from "react"
+import { TrackContainer, TrackText, TrackImage } from './style'
 
 function Track( props ) {
 
     return (
-        <div className="track container">
-            <img className="track item" src={props.img}/>
-            <label className="track item" >{props.name}</label> 
-            <label className="track item" >{props.artist}</label> 
-        </div>
+        <TrackContainer>
+            <TrackImage src={props.img}/>
+            <TrackText >{props.name}</TrackText> 
+            <TrackText >{props.artist}</TrackText> 
+        </TrackContainer>
     )
 
 }

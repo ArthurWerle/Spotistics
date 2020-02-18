@@ -1,10 +1,11 @@
 import React from "react"
+import { HeaderTitle } from './style'
 
 function Header( props ) {
 
     return (
         <div>
-            <div className="app header">Spotistics</div> 
+            <HeaderTitle>Spotistics</HeaderTitle> 
             <div></div>
         </div>
     )
