@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import hash from "./hash"
-import "./App.css"
+// import "./App.css"
 
 //components
 import Login from './lib/components/login'
@@ -9,6 +9,9 @@ import Greetings from './lib/components/greetings'
 import TopTracks from './lib/components/topTracks'
 import RecentlyPlayed from './lib/components/recentlyPlayed'
 import TopArtists from './lib/components/topArtists'
+
+//styled components
+import { AppContainer, AppHeader, MainContainer } from './styles'
 
 //queries
 import getUserTop from './lib/queries/getUserTop'
@@ -72,8 +75,8 @@ class App extends Component {
 
     render() {
         return (
-            <div className="App">
-                <header className="App-header">
+            <AppContainer>
+                <AppHeader>
                     { ! this.state.token && (
                         <div>
                             <Header/>
@@ -84,15 +87,19 @@ class App extends Component {
                         <Login/>
                     ) } */}
                     { this.state.user && <Greetings user={this.state.user.display_name}/> }
-                </header>
-                <body className="app body">
-                    <div className="main container">
+                </AppHeader>
+
+                <body>
+                    <MainContainer>
+
                         <RecentlyPlayed items={ this.state.recentlyPlayed }/>
                         <TopArtists items={ this.state.topArtists }/>
                         <TopTracks items={ this.state.topTracks }/>
-                    </div>
+
+                    </MainContainer>
                 </body>
-            </div>
+
+            </AppContainer>
         );
     }
 }
