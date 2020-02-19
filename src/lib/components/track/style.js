@@ -12,4 +12,7 @@ export const TrackText = styled.label`
     font-size: 15px;
 `
 
-export const TrackImage = styled( TrackText )
+export const TrackImage = styled.img`
+    display: block;
+    font-size: 15px;
+`

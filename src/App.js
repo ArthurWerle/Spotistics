@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import hash from "./hash"
-// import "./App.css"
 
 //components
 import Login from './lib/components/login'
@@ -9,6 +8,7 @@ import Greetings from './lib/components/greetings'
 import TopTracks from './lib/components/topTracks'
 import RecentlyPlayed from './lib/components/recentlyPlayed'
 import TopArtists from './lib/components/topArtists'
+import Credits from './lib/components/credits'
 
 //styled components
 import { AppContainer, AppHeader, MainContainer } from './styles'
@@ -81,23 +81,25 @@ class App extends Component {
                         <div>
                             <Header/>
                             <Login/>
+                            <Credits/>
                         </div>
                     ) }
-                    {/* { !this.state.token && (
-                        <Login/>
-                    ) } */}
                     { this.state.user && <Greetings user={this.state.user.display_name}/> }
                 </AppHeader>
-
                 <body>
                     <MainContainer>
-
                         <RecentlyPlayed items={ this.state.recentlyPlayed }/>
                         <TopArtists items={ this.state.topArtists }/>
                         <TopTracks items={ this.state.topTracks }/>
-
                     </MainContainer>
+                    { this.state.token && (
+                        <div>
+                            <label>Source on </label>
+                            <a href='https://github.com/ArthurWerle/Spotistics'> <span>Github</span> </a>
+                        </div>
+                    ) }
                 </body>
+
 
             </AppContainer>
         );
