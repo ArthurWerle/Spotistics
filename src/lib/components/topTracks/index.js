@@ -1,12 +1,12 @@
 import React from "react"
 import Track from "../track"
-import { Grid, Section } from '../../../globalStyles'
+import { Grid, Section, Title } from '../../../globalStyles'
 
 function TopTracks( props ) {
 
     return (
         <Section>
-            <h1> Your top tracks </h1>
+            <Title> Your top tracks </Title>
             <Grid>
                 { props.items.map( item => (
                     <Track 

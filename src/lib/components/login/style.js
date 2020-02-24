@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import constants from '../../util/constants'
 
 export const Description = styled.p`
     margin-top: 0;
@@ -7,8 +8,8 @@ export const Description = styled.p`
 
 export const LoginButton =  styled.a`
     border-radius: 2em;
-    background: #1bb952;
-    border: 0.2em solid #1bb952;
+    background: ${ constants.$GREEN_HEX_CODE };
+    border: 0.2em solid ${ constants.$GREEN_HEX_CODE };
     cursor: pointer;
     color: rgb(255, 255, 255);
     font-size: 3vmin;

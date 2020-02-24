@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import hash from "./hash"
+import { FaGithub } from 'react-icons/fa';
 
 //components
 import Login from './lib/components/login'
@@ -11,7 +12,10 @@ import TopArtists from './lib/components/topArtists'
 import Credits from './lib/components/credits'
 
 //styled components
-import {  AppHeader, MainContainer, Body, Footer } from './globalStyles'
+import {  AppHeader, MainContainer, Body, Footer, Source } from './globalStyles'
+
+//util
+import constants  from './lib/util/constants'
 
 //queries
 import getUserTop from './lib/queries/getUserTop'
@@ -64,20 +68,16 @@ class App extends Component {
 
     render() {
         const getPageFooter = () => {
-            if( isUserLogged( this.state ) ) {
-                return (
-                    <Footer className='footer'>
-                        <label>Source on</label>
-                        <a href='https://github.com/ArthurWerle/Spotistics'> <span>  Github </span> </a>
+            if( !isUserLogged( this.state ) ) {
+                return ( 
+                    <Footer>
+                        <Credits/>
                     </Footer>
                 )
             }
+
             
-            return ( 
-                <Footer>
-                    <Credits/>
-                </Footer>
-            )
+            return
         }
 
         const getPageHeader = () => {
@@ -98,6 +98,12 @@ class App extends Component {
                         <RecentlyPlayed items={ this.state.recentlyPlayed }/>
                         <TopArtists items={ this.state.topArtists }/>
                         <TopTracks items={ this.state.topTracks }/>
+                        <Source>
+                            <a href='https://github.com/ArthurWerle/Spotistics'> 
+                                <FaGithub/> 
+                            </a>
+                            <Credits color={ constants.$DEFAULT_TEXT_COLOR }/>
+                        </Source>
                     </MainContainer>
                 )
             }

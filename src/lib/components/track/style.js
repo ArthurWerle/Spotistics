@@ -7,9 +7,17 @@ export const TrackContainer = styled.div`
     flex: 1;
 `
 
-export const TrackText = styled.label`
+export const TrackArtist = styled.label`
     display: block;
-    font-size: 15px;
+    font-style: italic;
+    font-size: 11x;
+`
+
+export const TrackName = styled.label`
+    display: block;
+    font-style: italic;
+    font-weight: bolder;
+    font-size: 16px;
 `
 
 export const TrackImage = styled.img`

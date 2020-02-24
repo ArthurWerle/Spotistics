@@ -4,10 +4,10 @@ import { Container, Icon } from './style'
 
 const linkedinLink = 'https://www.linkedin.com/in/arthur-werle-a8635a114/'
 
-function Credits() {
+function Credits( props ) {
 
     return (
-        <Container>
+        <Container color={ props.color }>
             <label>Made with </label>
             <Icon> <FaHeart/></Icon>
             <span> by </span>

@@ -1,17 +1,17 @@
 import React from "react"
 import Track from "../track"
-import { Grid, Section } from '../../../globalStyles'
+import { Grid, Section, Title } from '../../../globalStyles'
 
 function TopArtists( props ) {
 
     return (
         <Section>
-            <h1> Your top artists </h1>
+            <Title> Your top artists </Title>
             <Grid>
                 { props.items.map( item => (
                     <Track 
                         key={ item.id }
-                        artist={ item.name }
+                        name={ item.name }
                         img={ item.images[1].url }>
                     </Track>
                 )) }

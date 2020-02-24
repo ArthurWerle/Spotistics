@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import constants from './lib/util/constants'
 
 export const Body = styled.div`
     width: 100%;
@@ -13,11 +14,35 @@ export const Body = styled.div`
     flex-direction: column;
 `
 
+export const Title = styled.h1`
+    color: ${ constants.$DEFAULT_TEXT_COLOR };
+`
+
 export const Footer = styled.footer`
     flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: ${ ({ color = 'white' }) => color  };
+`
+
+export const Source = styled( Footer )`
+    background-color: ${ constants.$GREEN_HEX_CODE } !important;
+    padding: 50px;
+    color: ${ constants.$DEFAULT_TEXT_COLOR };
+    text-align: center !important;
+    display: block !important;
+
+    > a {
+        margin-left: 10px;
+        border: none;
+        font-size: 45px;
+        color: black;
+    }
+
+    > div {
+        margin-top: 2em;
+    }
 `
 
 export const AppHeader = styled.div`
@@ -37,8 +62,12 @@ export const MainContainer = styled.div`
 
 export const Grid = styled.div`
     justify-items: center;
+    padding: 50px 25px;
+    justify-content: center;
+    border-radius: 10px;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    background-color: white;;
+    grid-template-columns: repeat(5, 0fr);
     grid-gap: 10px;
 `
 

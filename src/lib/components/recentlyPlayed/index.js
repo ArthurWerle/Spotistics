@@ -1,12 +1,12 @@
 import React from "react"
 import Track from "../track"
-import { Grid, Section } from '../../../globalStyles'
+import { Grid, Section, Title } from '../../../globalStyles'
 
 function RecentlyPlayed( props ) {
 
     return (
         <Section>
-            <h1> Recently played </h1>
+            <Title> Recently played </Title>
             <Grid>
                 { props.items.map( item => (
                     <Track 
