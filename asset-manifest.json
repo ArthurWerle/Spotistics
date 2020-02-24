@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/Spotistics/static/css/main.c75aa6cd.chunk.css",
-    "main.js": "/Spotistics/static/js/main.939d8862.chunk.js",
-    "main.js.map": "/Spotistics/static/js/main.939d8862.chunk.js.map",
+    "main.js": "/Spotistics/static/js/main.5c70b6a5.chunk.js",
+    "main.js.map": "/Spotistics/static/js/main.5c70b6a5.chunk.js.map",
     "runtime-main.js": "/Spotistics/static/js/runtime-main.96bced03.js",
     "runtime-main.js.map": "/Spotistics/static/js/runtime-main.96bced03.js.map",
     "static/js/2.85e32c0e.chunk.js": "/Spotistics/static/js/2.85e32c0e.chunk.js",
     "static/js/2.85e32c0e.chunk.js.map": "/Spotistics/static/js/2.85e32c0e.chunk.js.map",
     "index.html": "/Spotistics/index.html",
-    "precache-manifest.57736443abcab4dc075f4eacbe73905b.js": "/Spotistics/precache-manifest.57736443abcab4dc075f4eacbe73905b.js",
+    "precache-manifest.27711d06622167b052fe35c71074f353.js": "/Spotistics/precache-manifest.27711d06622167b052fe35c71074f353.js",
     "service-worker.js": "/Spotistics/service-worker.js",
     "static/css/main.c75aa6cd.chunk.css.map": "/Spotistics/static/css/main.c75aa6cd.chunk.css.map",
     "static/js/2.85e32c0e.chunk.js.LICENSE": "/Spotistics/static/js/2.85e32c0e.chunk.js.LICENSE"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.96bced03.js",
     "static/js/2.85e32c0e.chunk.js",
     "static/css/main.c75aa6cd.chunk.css",
-    "static/js/main.939d8862.chunk.js"
+    "static/js/main.5c70b6a5.chunk.js"
   ]
 }
