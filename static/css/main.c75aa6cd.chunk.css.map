@@ -1,0 +1,1 @@
+{"version":3,"sources":["index.css"],"names":[],"mappings":"AAAA,UACI,UAAW,CACX,WACJ,CAEA,KACI,QAAS,CACT,kBACJ,CAEA,MACI,UAAW,CACX,WACJ","file":"main.c75aa6cd.chunk.css","sourcesContent":["html, body {\r\n    width: 100%;\r\n    height: 100%;\r\n}\r\n\r\nbody {\r\n    margin: 0;\r\n    background: #1bb952;\r\n}\r\n\r\n#root {\r\n    width: 100%;\r\n    height: 100%;\r\n}"]}
