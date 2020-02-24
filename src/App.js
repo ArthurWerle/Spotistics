@@ -3,15 +3,15 @@ import hash from "./hash"
 
 //components
 import Login from './lib/components/login'
-import Header from './lib/components/header'
 import Greetings from './lib/components/greetings'
+import isUserLogged from './lib/util/isUserLogged'
 import TopTracks from './lib/components/topTracks'
 import RecentlyPlayed from './lib/components/recentlyPlayed'
 import TopArtists from './lib/components/topArtists'
 import Credits from './lib/components/credits'
 
 //styled components
-import { AppContainer, AppHeader, MainContainer } from './styles'
+import {  AppHeader, MainContainer, Body, Footer } from './globalStyles'
 
 //queries
 import getUserTop from './lib/queries/getUserTop'
@@ -36,29 +36,18 @@ class App extends Component {
     }
 
     executeQueries( token ) {
-        getUser( token, ( response ) => {
-            this.setState({
-                user: response
-            })
-        })
+        const handleResponseBy = ({ type }) => {
+            return ( response ) => {
+                this.setState({
+                    [ type ]: response.items ? response.items : response
+                })
+            } 
+        }
 
-        getRecentlyPlayed( token, ( response ) => {
-            this.setState({
-                recentlyPlayed: response.items
-            })
-        })
-
-        getUserTop( 'tracks', token, ( response ) => {
-            this.setState({
-                topTracks: response.items
-            })
-        })
-
-        getUserTop( 'artists', token, ( response ) => {
-            this.setState({
-                topArtists: response.items
-            })
-        })
+        getUser( token ).then( handleResponseBy({ type: 'user' }) )
+        getRecentlyPlayed( token ).then( handleResponseBy({ type: 'recentlyPlayed' }) )
+        getUserTop( 'tracks', token ).then( handleResponseBy({ type: 'topTracks' } ))
+        getUserTop( 'artists', token ).then( handleResponseBy({ type: 'topArtists' } ))
     }
 
     componentDidMount() {
@@ -74,34 +63,52 @@ class App extends Component {
     }
 
     render() {
-        return (
-            <AppContainer>
-                <AppHeader>
-                    { ! this.state.token && (
-                        <div>
-                            <Header/>
-                            <Login/>
-                            <Credits/>
-                        </div>
-                    ) }
-                    { this.state.user && <Greetings user={this.state.user.display_name}/> }
+        const getPageFooter = () => {
+            if( isUserLogged( this.state ) ) {
+                return (
+                    <Footer className='footer'>
+                        <label>Source on</label>
+                        <a href='https://github.com/ArthurWerle/Spotistics'> <span>  Github </span> </a>
+                    </Footer>
+                )
+            }
+            
+            return ( 
+                <Footer>
+                    <Credits/>
+                </Footer>
+            )
+        }
+
+        const getPageHeader = () => {
+            if( isUserLogged( this.state ) ) return
+
+            return (
+                <AppHeader className='login page'>
+                    { !isUserLogged( this.state ) && <Login/> }
+                    { isUserLogged( this.state ) && <Greetings user={this.state.user.display_name}/> }
                 </AppHeader>
-                <body>
-                    <MainContainer>
+            )
+        }
+
+        const getAppMainPage = () => {
+            if( isUserLogged( this.state ) ) {
+                return (
+                    <MainContainer className='mainContainer'>
                         <RecentlyPlayed items={ this.state.recentlyPlayed }/>
                         <TopArtists items={ this.state.topArtists }/>
                         <TopTracks items={ this.state.topTracks }/>
                     </MainContainer>
-                    { this.state.token && (
-                        <div>
-                            <label>Source on </label>
-                            <a href='https://github.com/ArthurWerle/Spotistics'> <span>Github</span> </a>
-                        </div>
-                    ) }
-                </body>
+                )
+            }
+        }
 
-
-            </AppContainer>
+        return (
+            <Body className='body'>
+                { getPageHeader() }
+                { getAppMainPage() }
+                { getPageFooter() }
+            </Body>          
         );
     }
 }

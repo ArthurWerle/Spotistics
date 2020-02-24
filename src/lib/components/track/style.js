@@ -13,6 +13,10 @@ export const TrackText = styled.label`
 `
 
 export const TrackImage = styled.img`
+    max-width: 17em;
+    max-height: 12em;
+    width: auto;
+    height: auto;
     display: block;
     font-size: 15px;
 `

@@ -4,8 +4,7 @@ function Greetings( props ) {
 
     return (
         <div>
-            <div>Bem-vindo, {props.user}</div>
-            <div>Aqui estão alguns dados sobre a sua conta do Spotify</div>
+            <div>Hey {props.user}, what's up?</div>
         </div>
     )
 

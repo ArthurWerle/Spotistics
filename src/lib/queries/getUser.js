@@ -1,9 +1,13 @@
-import ajaxSend from '../util/ajaxSend'
+export default async ( token ) => {
 
-export default ( token, cb ) => {
+    const config = {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${ token }`
+        }
+    }
 
-    ajaxSend( `https://api.spotify.com/v1/me`, 'GET', token, ( response ) => {
-        if( cb ) cb( response )
-    })
-
+    const response = await fetch( `https://api.spotify.com/v1/me`, config )
+    const result = await response.json()
+    return result
 }

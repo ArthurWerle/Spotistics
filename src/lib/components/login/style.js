@@ -1,5 +1,10 @@
 import styled from 'styled-components'
 
+export const Description = styled.p`
+    margin-top: 0;
+    margin-bottom: 5em;
+`
+
 export const LoginButton =  styled.a`
     border-radius: 2em;
     background: #1bb952;
