@@ -1,4 +1,5 @@
 const sizes = {
+    smallMobile: '375px',
     mobile: '425px',
 }
 
@@ -11,4 +12,5 @@ export default {
 
     //screen sizes
     mobile:  `(max-width: ${ sizes.mobile })`,
+    smallMobile:  `(max-width: ${ sizes.smallMobile })`,
 }

@@ -39,6 +39,8 @@ export const TrackSmallImage = styled.img`
 
     @media ${ constants.mobile } {
         display: block !important;
+        max-width: 64px;
+        max-height: 64px;
     }
 `
 

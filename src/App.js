@@ -4,7 +4,6 @@ import { FaGithub } from 'react-icons/fa';
 
 //components
 import Login from './lib/components/login'
-import Greetings from './lib/components/greetings'
 import isUserLogged from './lib/util/isUserLogged'
 import TopTracks from './lib/components/topTracks'
 import RecentlyPlayed from './lib/components/recentlyPlayed'
@@ -12,7 +11,7 @@ import TopArtists from './lib/components/topArtists'
 import Credits from './lib/components/credits'
 
 //styled components
-import {  AppHeader, MainContainer, Body, Footer, Source } from './globalStyles'
+import {  AppHeader, MainContainer, Body, Footer, Source, Loader } from './globalStyles'
 
 //util
 import constants  from './lib/util/constants'
@@ -27,6 +26,7 @@ class App extends Component {
     constructor() {
         super()
         this.state = {
+            loading: false,
             user: null,
             token: null,
             topTracks: [],
@@ -39,7 +39,7 @@ class App extends Component {
         this.getUserTop = getUserTop.bind(this)
     }
 
-    async executeQueries( token ) {
+    executeQueries( token ) {
         const handleResponseBy = ({ type }) => {
             return ( response ) => {
                 if( !response ) return
@@ -50,21 +50,44 @@ class App extends Component {
             } 
         }
 
-        await getUser( token ).then( handleResponseBy({ type: 'user' }) )
-        await getRecentlyPlayed( token ).then( handleResponseBy({ type: 'recentlyPlayed' }) )
-        await getUserTop( 'tracks', token ).then( handleResponseBy({ type: 'topTracks' } ))
-        await getUserTop( 'artists', token ).then( handleResponseBy({ type: 'topArtists' } ))
+        return new Promise( async ( resolve, reject ) => {
+            try {
+                await getUser( token ).then( handleResponseBy({ type: 'user' }) )
+                await getRecentlyPlayed( token ).then( handleResponseBy({ type: 'recentlyPlayed' }) )
+                await getUserTop( 'tracks', token ).then( handleResponseBy({ type: 'topTracks' } ))
+                await getUserTop( 'artists', token ).then( handleResponseBy({ type: 'topArtists' } ))
+            } catch( e ) {
+                reject( e )
+                throw e
+            }
+            
+            resolve()
+        })
+
     }
 
     componentDidMount() {
-        let _token = hash.access_token;
+        const startLoading = () => {
+            this.setState({
+                loading: true
+            })
+        }
 
+        const stopLoading = () => {
+            this.setState({
+                loading: false
+            })
+        }
+
+        let _token = hash.access_token
+        
         if( _token ) {
+            startLoading()
             this.setState({
                 token: _token
             })
 
-            this.executeQueries( _token )
+            this.executeQueries( _token ).then( stopLoading )
         }
     }
 
@@ -88,7 +111,6 @@ class App extends Component {
             return (
                 <AppHeader className='login page'>
                     { !isUserLogged( this.state ) && <Login/> }
-                    { isUserLogged( this.state ) && <Greetings user={this.state.user.display_name}/> }
                 </AppHeader>
             )
         }
@@ -111,10 +133,22 @@ class App extends Component {
             }
         }
 
+        const geLoader = () => {
+            return (
+                <Loader>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </Loader>
+            )
+        }
+
         return (
             <Body className='body'>
                 { getPageHeader() }
-                { getAppMainPage() }
+                { !this.state.loading && getAppMainPage() }
+                { this.state.loading && geLoader() }
                 { getPageFooter() }
             </Body>          
         );

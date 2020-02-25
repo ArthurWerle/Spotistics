@@ -5,6 +5,10 @@ export const Title = styled.h1`
     @media ${ constants.mobile } {
         font-size: 65px;
     }
+
+    @media ${ constants.smallMobile } {
+        font-size: 50px;
+    }
 `
 
 export const Description = styled.p`
