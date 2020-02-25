@@ -15,7 +15,7 @@ export const Body = styled.div`
 `
 
 export const Title = styled.h1`
-    color: ${ constants.$DEFAULT_TEXT_COLOR };
+    color: ${ ({ color = constants.$DEFAULT_TEXT_COLOR }) => color };
 `
 
 export const Footer = styled.footer`
@@ -36,7 +36,7 @@ export const Source = styled( Footer )`
     > a {
         margin-left: 10px;
         border: none;
-        font-size: 45px;
+        font-size: ${ constants.$LG_ICON_SIZE };
         color: black;
     }
 
@@ -69,8 +69,14 @@ export const Grid = styled.div`
     background-color: white;;
     grid-template-columns: repeat(5, 0fr);
     grid-gap: 10px;
+
+    @media ${ constants.mobile } {
+        grid-template-columns: repeat(3, 0fr);
+    }
 `
 
 export const Section = styled.div`
     padding: 30px;
+    background-color: ${ ({ color }) => color  };
+    border-radius: ${ ({ borderRadius })  => borderRadius };
 `

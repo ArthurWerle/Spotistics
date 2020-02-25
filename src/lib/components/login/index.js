@@ -1,12 +1,12 @@
 import React from "react"
 import { authEndpoint, clientId, redirectUri, scopes } from "../../../config"
-import { LoginButton, Description } from './style'
+import { LoginButton, Description, Title } from './style'
 
 function Login() {
 
     return (
         <>
-            <h1> Spotistics </h1>
+            <Title> Spotistics </Title>
             <Description>
                 Login with your spotify account and see your <em> most listened </em> tracks and artists
             </Description>

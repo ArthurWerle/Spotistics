@@ -1,11 +1,12 @@
 import React from "react"
-import { TrackContainer, TrackName, TrackArtist, TrackImage } from './style'
+import { TrackContainer, TrackName, TrackArtist, TrackSmallImage, TrackLargeImage } from './style'
 
 function Track( props ) {
 
     return (
         <TrackContainer>
-            <TrackImage src={ props.img }/>
+            <TrackSmallImage src={ props.smallImg }/>
+            <TrackLargeImage src={ props.largeImg }/>
             <TrackName>{ props.name }</TrackName> 
             <TrackArtist>{ props.artist }</TrackArtist> 
         </TrackContainer>

@@ -39,19 +39,21 @@ class App extends Component {
         this.getUserTop = getUserTop.bind(this)
     }
 
-    executeQueries( token ) {
+    async executeQueries( token ) {
         const handleResponseBy = ({ type }) => {
             return ( response ) => {
+                if( !response ) return
+                
                 this.setState({
                     [ type ]: response.items ? response.items : response
                 })
             } 
         }
 
-        getUser( token ).then( handleResponseBy({ type: 'user' }) )
-        getRecentlyPlayed( token ).then( handleResponseBy({ type: 'recentlyPlayed' }) )
-        getUserTop( 'tracks', token ).then( handleResponseBy({ type: 'topTracks' } ))
-        getUserTop( 'artists', token ).then( handleResponseBy({ type: 'topArtists' } ))
+        await getUser( token ).then( handleResponseBy({ type: 'user' }) )
+        await getRecentlyPlayed( token ).then( handleResponseBy({ type: 'recentlyPlayed' }) )
+        await getUserTop( 'tracks', token ).then( handleResponseBy({ type: 'topTracks' } ))
+        await getUserTop( 'artists', token ).then( handleResponseBy({ type: 'topArtists' } ))
     }
 
     componentDidMount() {

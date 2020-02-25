@@ -7,8 +7,16 @@ export default async ( type, token ) => {
         }
     }
 
-    const response = await fetch( `https://api.spotify.com/v1/me/top/${type}`, config )
-    const result = await response.json()
-    return result
+    let result = null
+
+    try {
+        const response = await fetch( `https://api.spotify.com/v1/me/top/${type}`, config )
+        result = await response.clone().json()
+    } catch( e ) {
+        console.log( e )
+    } finally {
+        return result
+    }
+
 
 }

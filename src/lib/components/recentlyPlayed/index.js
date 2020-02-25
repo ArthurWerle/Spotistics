@@ -13,7 +13,8 @@ function RecentlyPlayed( props ) {
                         key={ item.track.id }
                         name={ item.track.name }
                         artist={ item.track.artists[0].name }
-                        img={ item.track.album.images[1].url }>
+                        smallImg={ item.track.album.images[2].url }
+                        largeImg={ item.track.album.images[1].url }>
                     </Track>
                 )) }
             </Grid>
