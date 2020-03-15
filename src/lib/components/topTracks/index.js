@@ -13,7 +13,7 @@ function TopTracks( props ) {
 
         if( isEmpty() ) {
             return (
-                <Message type={ MessageTypes.SORRY } text="For some reason, didn't found your top tracks." />
+                <Message type={ MessageTypes.SORRY } text="It looks like you don't have enough spotify activity for this." />
             )
         } 
 

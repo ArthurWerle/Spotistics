@@ -8,7 +8,7 @@ function Login() {
         <>
             <Title> Spotistics </Title>
             <Description>
-                Login with your spotify account and see your <em> most listened </em> tracks and artists
+                Login with your spotify account and see your <em> recently played </em> and <em> most listened </em> tracks and artists
             </Description>
 
             <LoginButton
