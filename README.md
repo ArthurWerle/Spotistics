@@ -1,4 +1,7 @@
-PS: It is not done yet.
+# Spotistics
+[](https://i.imgur.com/JXw8s4B.png)
+[](https://i.imgur.com/24Ern4K.png)
+[](https://i.imgur.com/OiosVYm.png)
 
 ## React application that uses SpotifyAPI to allow users to see:
  - Recently played tracks
